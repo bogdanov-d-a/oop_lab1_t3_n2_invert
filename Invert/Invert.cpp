@@ -14,9 +14,9 @@ bool ReadMatrix(const char fileName[], CMatrix ** outMatrixPtr)
 	{
 		*outMatrixPtr = new CMatrix(INPUT_MATRIX_SIZE);
 
-		for (CMatrix::index_t column = 0; column < INPUT_MATRIX_SIZE; ++column)
+		for (CMatrix::index_t row = 0; row < INPUT_MATRIX_SIZE; ++row)
 		{
-			for (CMatrix::index_t row = 0; row < INPUT_MATRIX_SIZE; ++row)
+			for (CMatrix::index_t column = 0; column < INPUT_MATRIX_SIZE; ++column)
 			{
 				CMatrix::value_t tmpValue;
 				int readFiledCnt = fscanf_s(f, "%lf", &tmpValue);

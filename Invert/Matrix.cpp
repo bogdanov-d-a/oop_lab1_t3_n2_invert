@@ -116,9 +116,9 @@ CMatrix::value_t CMatrix::GetCofactor(index_t row, index_t column) const
 
 void CMatrix::Print() const
 {
-	for (CMatrix::index_t column = 0; column < m_size; ++column)
+	for (CMatrix::index_t row = 0; row < m_size; ++row)
 	{
-		for (CMatrix::index_t row = 0; row < m_size; ++row)
+		for (CMatrix::index_t column = 0; column < m_size; ++column)
 		{
 			printf("%lf", m_data[row][column]);
 			if (row != m_size - 1)

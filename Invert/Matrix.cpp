@@ -120,8 +120,8 @@ void CMatrix::Print() const
 	{
 		for (CMatrix::index_t column = 0; column < m_size; ++column)
 		{
-			printf("%lf", m_data[row][column]);
-			if (row != m_size - 1)
+			printf("%0.3lf", m_data[row][column]);
+			if (column != m_size - 1)
 			{
 				printf("\t");
 			}

@@ -130,19 +130,6 @@ void CMatrix::Print() const
 	}
 }
 
-void CMatrix::GetTransposedMatrix(CMatrix ** outMatrixPtr) const
-{
-	*outMatrixPtr = new CMatrix(m_size);
-
-	for (index_t row = 0; row < m_size; ++row)
-	{
-		for (index_t column = 0; column < m_size; ++column)
-		{
-			(*outMatrixPtr)->SetValue(row, column, m_data[column][row]);
-		}
-	}
-}
-
 void CMatrix::DivideMatrixValues(value_t divisor)
 {
 	assert(divisor != 0);
@@ -159,16 +146,8 @@ void CMatrix::DivideMatrixValues(value_t divisor)
 void CMatrix::GetInvertedMatrix(CMatrix ** outMatrixPtr) const
 {
 	assert(!IsSingular());
-
-	CMatrix *transposedMatrix;
-	GetTransposedMatrix(&transposedMatrix);
-
-	CMatrix *adjugateMatrix;
-	transposedMatrix->GetAdjugate(&adjugateMatrix);
-
-	delete transposedMatrix;
-	adjugateMatrix->DivideMatrixValues(GetDeterminant());
-	*outMatrixPtr = adjugateMatrix;
+	GetAdjugate(outMatrixPtr);
+	(*outMatrixPtr)->DivideMatrixValues(GetDeterminant());
 }
 
 bool CMatrix::IsSingular() const

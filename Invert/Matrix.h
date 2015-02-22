@@ -15,7 +15,6 @@ public:
 	value_t GetMinor(index_t row, index_t column) const;
 	value_t GetCofactor(index_t row, index_t column) const;
 	void Print() const;
-	void GetTransposedMatrix(CMatrix ** outMatrixPtr) const;
 	void DivideMatrixValues(value_t divisor);
 	void GetInvertedMatrix(CMatrix ** outMatrixPtr) const;
 	bool IsSingular() const;

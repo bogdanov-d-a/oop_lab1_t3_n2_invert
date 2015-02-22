@@ -19,8 +19,8 @@ bool ReadMatrix(const char fileName[], CMatrix ** outMatrixPtr)
 			for (CMatrix::index_t column = 0; column < INPUT_MATRIX_SIZE; ++column)
 			{
 				CMatrix::value_t tmpValue;
-				int readFiledCnt = fscanf_s(f, "%lf", &tmpValue);
-				assert(readFiledCnt == 1);
+				int readFieldCnt = fscanf_s(f, "%lf", &tmpValue);
+				assert(readFieldCnt == 1);
 				(*outMatrixPtr)->SetValue(row, column, tmpValue);
 			}
 		}
@@ -37,27 +37,36 @@ bool ReadMatrix(const char fileName[], CMatrix ** outMatrixPtr)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CMatrix *srcMatrix;
-
-	if (ReadMatrix("input.txt", &srcMatrix))
+	if (argc == 2)
 	{
-		if (!srcMatrix->IsSingular())
+		CMatrix *srcMatrix;
+
+		if (ReadMatrix(argv[1], &srcMatrix))
 		{
-			CMatrix *invertedMatrix;
-			srcMatrix->GetInvertedMatrix(&invertedMatrix);
-			invertedMatrix->Print();
-			delete invertedMatrix;
+			if (!srcMatrix->IsSingular())
+			{
+				CMatrix *invertedMatrix;
+				srcMatrix->GetInvertedMatrix(&invertedMatrix);
+				invertedMatrix->Print();
+				delete invertedMatrix;
+			}
+			else
+			{
+				puts("Singular matrix can't be inverted");
+			}
+
+			delete srcMatrix;
+			return 0;
 		}
 		else
 		{
-			puts("Singular matrix can't be inverted");
+			return 1;
 		}
-
-		delete srcMatrix;
-		return 0;
 	}
 	else
 	{
-		return 1;
+		assert(argc > 0);
+		printf("Usage: %s <matrix file>\n", argv[0]);
+		return 2;
 	}
 }

@@ -3,15 +3,14 @@
 class CMatrixSquare2
 {
 public:
-	typedef uint8_t index_t;
-	typedef double value_t;
+	typedef double Value;
 
 	CMatrixSquare2();
-	void SetValue(index_t row, index_t column, value_t value);
-	value_t GetDeterminant() const;
+	void SetValue(size_t row, size_t column, Value value);
+	Value GetDeterminant() const;
 
-protected:
-	static const index_t SIZE = 2;
-	value_t m_data[SIZE][SIZE];
-	static bool CheckCoords(index_t row, index_t column);
+private:
+	static const size_t SIZE = 2;
+	Value m_data[SIZE][SIZE];
+	static bool CheckCoords(size_t row, size_t column);
 };
